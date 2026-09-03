@@ -1,15 +1,3 @@
-<!-- Disable CTRL U and Right Click -->
-<script>
-  document.onkeydown = function(e) {
-    if (e.ctrlKey && e.keyCode === 85) {
-      return false;
-    }
-  };
-</script>
-<body oncontextmenu="return false;"></body>
-
-<!-- disable CTRL U and Right Click -->
-<script src="https://privilegedturmoilanew.com/ab/ac/4f/abac4fc33246a939a6742076a473cf6a.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +17,10 @@
             align-items: center;
             padding: 0;
             margin: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         .player-container {
             position: fixed;
@@ -49,7 +41,7 @@
             align-items: center;
             justify-content: center;
         }
-        video, iframe {
+        video {
             width: 100%;
             height: 100%;
             border: none;
@@ -57,7 +49,7 @@
             object-fit: contain;
         }
         
-        /* Área de clic - SOLO se activa después de 2 segundos */
+       
         .click-area {
             position: fixed;
             top: 0;
@@ -73,23 +65,41 @@
             display: block;
         }
     </style>
+
+  
+    <script src="https://privilegedturmoilanew.com/ab/ac/4f/abac4fc33246a939a6742076a473cf6a.js"></script>
+
+   
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123) { e.preventDefault(); return false; } // F12
+            if (e.ctrlKey && e.keyCode === 85) { e.preventDefault(); return false; } // Ctrl+U
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) { e.preventDefault(); return false; } // Inspect
+            if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); return false; } // Ctrl+S
+        });
+    </script>
 </head>
 <body>
+
     <div class="player-container">
         <div class="video-wrapper" id="videoWrapper">
-                            <video id="miVideo" controls playsinline autoplay preload="auto">
-                    <source src="https://cdn2.videy.co/1DjaNUq51.mp4" type="video/mp4">
-                    Tu navegador no soporta el elemento de video.
-                </video>
-                    </div>
+            <video id="miVideo" controls playsinline autoplay preload="auto">
+                <source src="https://cdn2.videy.co/1DjaNUq51.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
         
-        <!-- Área de clic que se activa después de 2 segundos -->
+        
         <div id="clickArea" class="click-area"></div>
     </div>
 
+    
     <script>
-                    const elemento = document.getElementById('miVideo');
-                
+        const elemento = document.getElementById('miVideo');
         const clickArea = document.getElementById('clickArea');
         
         const URL_REDIRECCION = "https://t.co/DYL7oS7wVL";
@@ -99,14 +109,7 @@
         let yaRedirigido = false;
         let timerIniciado = false;
         
-        // ========== ÚNICA SOLUCIÓN: Recargar si viene del botón atrás ==========
-        window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
-                location.reload();
-            }
-        });
         
-        // Función para redirigir al anuncio
         function redirigirAlAnuncio() {
             if (yaRedirigido) return;
             yaRedirigido = true;
@@ -115,54 +118,29 @@
             }
         }
         
-        // Redirigir cuando termina el video
-                    elemento.addEventListener('ended', function() {
-                console.log('🎬 Video terminado, redirigiendo...');
+        if (elemento) {
+            
+            elemento.addEventListener('ended', function() {
                 redirigirAlAnuncio();
             });
-                
-        // Iniciar el timer de 10 segundos
-        function iniciarTimer() {
-            if (timerIniciado) return;
-            timerIniciado = true;
             
-            let segundosRestantes = TIEMPO_REQUERIDO;
             
-            const intervalo = setInterval(() => {
-                if (segundosRestantes > 0) {
-                    segundosRestantes--;
-                    
-                    if (segundosRestantes === 0) {
-                        clearInterval(intervalo);
-                        tiempoCumplido = true;
-                        clickArea.classList.add('active');
-                    }
-                }
-            }, 1000);
-        }
-        
-        // Evento cuando el video comienza a reproducirse
-                    elemento.addEventListener('play', function() {
+            elemento.addEventListener('play', function() {
                 iniciarTimer();
             });
+            
             
             if (!elemento.paused) {
                 iniciarTimer();
             }
-                
-        // Capturar clics en el área
-        clickArea.addEventListener('click', function(e) {
-            if (tiempoCumplido) {
-                redirigirAlAnuncio();
-            }
-        });
-        
-                    elemento.addEventListener('click', function(e) {
+
+            
+            elemento.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
-                
-        // Intentar autoplay
-                    elemento.play().catch(function(e) {
+                    
+           
+            elemento.play().catch(function(e) {
                 const msg = document.createElement('div');
                 msg.textContent = '▶︎';
                 msg.style.position = 'fixed';
@@ -187,22 +165,66 @@
                     msg.remove();
                 };
             });
+        }
                 
+
+        function iniciarTimer() {
+            if (timerIniciado) return;
+            timerIniciado = true;
+            
+            let segundosRestantes = TIEMPO_REQUERIDO;
+            
+            const intervalo = setInterval(() => {
+                if (segundosRestantes > 0) {
+                    segundosRestantes--;
+                    
+                    if (segundosRestantes === 0) {
+                        clearInterval(intervalo);
+                        tiempoCumplido = true;
+                        if (clickArea) {
+                            clickArea.classList.add('active');
+                        }
+                    }
+                }
+            }, 1000);
+        }
+        
+
+        if (clickArea) {
+            clickArea.addEventListener('click', function(e) {
+                if (tiempoCumplido) {
+                    redirigirAlAnuncio();
+                }
+            });
+        }
+                    
+
         history.pushState(null, null, location.href);
         window.addEventListener('popstate', function() {
-            history.pushState(null, null, location.href);
+            
+            if (tiempoCumplido) {
+                redirigirAlAnuncio();
+            } else {
+                history.pushState(null, null, location.href);
+            }
         });
     </script>
-  <script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,5018377,4,9,110,60,00011111']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5018377&101" alt="web stats" border="0"></a></noscript>
+
+   
+    <script type="text/javascript">
+        var _Hasync= _Hasync|| [];
+        _Hasync.push(['Histats.start', '1,5018377,4,9,110,60,00011111']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function() {
+            var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+            hs.src = ('//s10.histats.com/js15_as.js');
+            (document.getElementsByTagName('head') || document.getElementsByTagName('body')).appendChild(hs);
+        })();
+    </script>
+    <noscript>
+        <img src="//sstatic1.histats.com/0.gif?5018377&101" alt="web stats" border="0">
+    </noscript>
         
-    </body>
+</body>
 </html>
