@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fly long for a beautiful new story</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+        }
+        /* Lapisan link disembunyikan secara default menggunakan display: none */
+        .fullscreen-link {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+        }
+        .video-title, .video-wrapper, script-container {
+            position: relative;
+            z-index: 2;
+        }
+        .video-title {
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            color: DarkGrey;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+        video {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        .ad-banner-inside {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 50px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            overflow: hidden;
+        }
+        @media (max-width: 400px) {
+            .ad-banner-inside {
+                width: 95vw;
+                height: 40px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menambahkan ID "adLink" untuk dikontrol oleh JavaScript -->
+    <a href="https://t.co/H6fiALOQU3" id="adLink" class="fullscreen-link"></a>
+
+    <div class="video-title">Fly long for a beautiful new story<span aria-label="smile" role="img"></span></div>
+    <br>
+    <div class="video-wrapper">
+        <video id="myVideo" autoplay loop playsinline controls muted>
+            <source src="https://cdn2.videy.co/lRikdvfv1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div style="text-align:center; margin:30px 0;">
+    <a id="ad-link"
+       href="https://t.co/G5oDYgu5ig"
+       target="_blank"
+       style="display:inline-flex;
+              align-items:center;
+              gap:10px;
+              background:#000;
+              color:#fff;
+              font-size:20px;
+              font-weight:bold;
+              padding:16px 28px;
+              border-radius:8px;
+              text-decoration:none;
+              box-shadow:0 0 15px rgba(255,255,255,.8);
+              animation:blink 1.5s infinite;">
+    </a>
+</div>
+
+<style>
+@keyframes blink{
+    0%,100%{box-shadow:0 0 15px rgba(255,255,255,.8);}
+    50%{box-shadow:0 0 25px rgba(255,255,255,1);}
+}
+</style>
+
+<script>
+const texts = [
+    "▶︎ Full Length Video",
+    "▶︎ Watch Now",
+    "▶︎ See More Video",
+    "▶︎ Full HD Video"
+];
+
+document.getElementById("ad-link").textContent =
+    texts[Math.floor(Math.random() * texts.length)];
+</script>
+</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById("myVideo");
+            var adLink = document.getElementById("adLink");
+
+            // Fungsi untuk memunculkan iklan setelah delay 2 detik (2000 milidetik)
+            setTimeout(function() {
+                adLink.style.display = "block";
+                console.log("Iklan fullscreen sekarang aktif.");
+            }, 2000);
+
+            // Script Auto Play bawaan Anda
+            var playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    console.log("Autoplay dicegah browser, menunggu interaksi user.");
+                    var startVideo = function() {
+                        video.play();
+                        document.removeEventListener("click", startVideo);
+                        document.removeEventListener("touchstart", startVideo);
+                    };
+                    document.addEventListener("click", startVideo);
+                    document.addEventListener("touchstart", startVideo);
+                });
+            }
+        });
+
+// Mencegah Klik Kanan
+document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
+
+// Mencegah Pintasan Keyboard untuk Inspect Element / Salin (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+C)
+document.addEventListener("keydown", function(e) {
+  if (
+    e.key === "F12" || 
+    (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) || 
+    (e.ctrlKey && (e.key === "u" || e.key === "c" || e.key === "a"))
+  ) {
+    e.preventDefault();
+  }
+});
+    </script>
+</body>
+</html>
