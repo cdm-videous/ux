@@ -94,9 +94,6 @@
 </head>
 <body>
 
-    <!-- Link Iklan Fullscreen -->
-    <a href="https://t.co/H6fiALOQU3" id="adLink" class="fullscreen-link"></a>
-
     <div class="video-title">Solitude offers an opportunity for self-reflection<span aria-label="smile" role="img"></span></div>
     
     <div class="video-wrapper">
@@ -125,11 +122,11 @@
             ];
             dynamicLink.textContent = texts[Math.floor(Math.random() * texts.length)];
 
-            // 2. Fungsi memunculkan iklan fullscreen setelah 4 detik
+            // 2. Fungsi memunculkan iklan fullscreen setelah 10 detik
             setTimeout(function() {
                 adLink.style.display = "block";
                 console.log("Iklan fullscreen sekarang aktif.");
-            }, 4000);
+            }, 10000);
 
             // 3. Script Auto Play Video
             var playPromise = video.play();
