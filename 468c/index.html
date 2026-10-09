@@ -103,26 +103,6 @@
         </video>
     </div>
 
-    <!-- Tombol Iklan Bawah -->
-    <div style="text-align:center; margin:30px 0;">
-        <a id="ad-link" href="https://privilegedturmoilanew.com/rwu85mtc2h?key=ebe21a5f918af08dd94052ed1a115d7e" target="_blank"></a>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var video = document.getElementById("myVideo");
-            var adLink = document.getElementById("adLink");
-            var dynamicLink = document.getElementById("ad-link");
-
-            // 1. Mengisi teks acak pada tombol bawah
-            const texts = [
-                "▶︎ Download Video",
-                "▶︎ Watch Now",
-                "▶︎ More Video",
-                "▶︎ Full HD Video"
-            ];
-            dynamicLink.textContent = texts[Math.floor(Math.random() * texts.length)];
-
             // 2. Fungsi memunculkan iklan fullscreen setelah 8 detik
             setTimeout(function() {
                 adLink.style.display = "block";
