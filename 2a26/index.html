@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I’d rather just lie down until I fall asleep</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- 1. Lapisan Keamanan: Content Security Policy (CSP) Dasar -->
+    <!-- Memastikan skrip, gambar, dan media hanya bisa dimuat dari sumber tepercaya -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' *.histats.com; media-src 'self' cdn2.videy.co; img-src 'self' *.histats.com; style-src 'self' 'unsafe-inline';">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+            /* Mencegah teks dipilih secara tidak sengaja */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .fullscreen-link {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+        }
+        .video-title, .video-wrapper, .script-container {
+            position: relative;
+            z-index: 2;
+        }
+        .video-title {
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            color: DarkGrey;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+        video {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        .ad-banner-inside {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 50px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            overflow: hidden;
+        }
+        @keyframes blink {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,.8); }
+            50% { box-shadow: 0 0 25px rgba(255,255,255,1); }
+        }
+        #ad-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #000;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 16px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255,255,255,.8);
+            animation: blink 1.5s infinite;
+        }
+        @media (max-width: 400px) {
+            .ad-banner-inside {
+                width: 95vw;
+                height: 40px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-title">I’d rather just lie down until I fall asleep<span aria-label="smile" role="img"></span></div>
+
+    <div class="video-wrapper">
+        <video id="myVideo" autoplay loop playsinline controls muted>
+            <source src="https://cdn2.videy.co/sBmBi9wR1.mp4" type="video/mp4">
+            Browser Anda tidak mendukung tag video.
+        </video>
+    </div>
+
+    <!-- 2. Perbaikan Struktur: Tag <script> pembuka yang sebelumnya hilang -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById("myVideo");
+            
+            if (video) {
+                // Script Auto Play Video
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        console.log("Autoplay dicegah browser, menunggu interaksi user.");
+                        var startVideo = function() {
+                            video.play().catch(function(err) { console.log("Gagal memutar:", err); });
+                            document.removeEventListener("click", startVideo);
+                            document.removeEventListener("touchstart", startVideo);
+                        };
+                        document.addEventListener("click", startVideo);
+                        document.addEventListener("touchstart", startVideo);
+                    });
+                }
+            }
+        });
+
+        // Anti-Inspect Element & Proteksi Dasar
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (
+                e.key === "F12" || 
+                (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C" || e.key === "i" || e.key === "j" || e.key === "c")) || 
+                (e.ctrlKey && (e.key === "u" || e.key === "c" || e.key === "a" || e.key === "U" || e.key === "C" || e.key === "A"))
+            ) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5060066,4,9,110,60,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5060066&101" alt="free log" border="0"></a></noscript>
+        </a>
+    </noscript>
+</body>
+</html>
